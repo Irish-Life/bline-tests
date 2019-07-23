@@ -37,3 +37,7 @@ xmlrpc.php
 /profiles
 /scripts
 /themes
+
+# Ignore videos and screenshots
+/screenshots
+/videos
