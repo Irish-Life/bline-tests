@@ -7,17 +7,22 @@ context('Preliminary', () => {
 
 
   it('Loads the homepage', () => {
-    cy.visit('http://pages.bline.ie');
+    cy.visit('/');
     cy.url().should('match', /pages.bline.ie/);
   })
 
   it('Checks a user can log in', () => {
-    cy.visit('http://pages.bline.ie/user/login');
-    cy.get('#edit-name').type('bline_user');
-    cy.get('#edit-pass').type('password');
-    cy.get('#edit-submit').click();
+    cy.login(Cypress.env('cyAdminUser'), Cypress.env('cyAdminPassword'))
+    cy.url().should('contain', "user/6");
 
-    cy.url().should('match', /user\/1/);
+  })
+
+  it('Logs the user out', () => {
+    cy.login(Cypress.env('cyAdminUser'), Cypress.env('cyAdminPassword'));
+    cy.reload();
+    cy.logout();
+    cy.reload();
+    cy.get('.toolbar-icon-system-admin-content').should('be', false);
   })
 
 })

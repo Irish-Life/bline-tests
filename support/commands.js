@@ -25,16 +25,21 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add("login", (user, password) => {
-  return cy.request({
-    method: 'POST',
-    url: '/user/login',
-    form: true,
-    body: {
-      name: user,
-      pass: password,
-      form_id: 'user_login_form'
-    }
-  });
+  // return cy.request({
+  //   method: 'POST',
+  //   url: '/user/login',
+  //   form: true,
+  //   body: {
+  //     name: user,
+  //     pass: password,
+  //     form_id: 'user_login_form'
+  //   }
+  // });
+  cy.visit('user/login');
+  cy.get('#edit-name').type(Cypress.env('cyAdminUser'));
+  cy.get('#edit-pass').type(Cypress.env('cyAdminPassword'));
+  cy.get('#edit-submit').click();
+  return;
 });
 
 Cypress.Commands.add('logout', () => {
