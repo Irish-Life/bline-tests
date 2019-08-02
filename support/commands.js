@@ -36,8 +36,8 @@ Cypress.Commands.add("login", (user, password) => {
   //   }
   // });
   cy.visit('user/login');
-  cy.get('#edit-name').type(Cypress.env('cyAdminUser'));
-  cy.get('#edit-pass').type(Cypress.env('cyAdminPassword'));
+  cy.get('#edit-name').type(user);
+  cy.get('#edit-pass').type(password);
   cy.get('#edit-submit').click();
   return;
 });
