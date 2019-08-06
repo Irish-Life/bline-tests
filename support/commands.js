@@ -25,16 +25,6 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add("login", (user, password) => {
-  // return cy.request({
-  //   method: 'POST',
-  //   url: '/user/login',
-  //   form: true,
-  //   body: {
-  //     name: user,
-  //     pass: password,
-  //     form_id: 'user_login_form'
-  //   }
-  // });
   cy.visit('user/login');
   cy.get('#edit-name').type(user);
   cy.get('#edit-pass').type(password);
