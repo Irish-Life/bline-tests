@@ -32,8 +32,10 @@ context('Creator', () => {
     cy.get('.page-title').should('contain', 'Add content');
     cy.contains('Article').click();
     cy.get('.page-title').should('contain', 'Create Article');
-
-    cy.get('[data-drupal-selector="edit-title-0-value"]').type('Article Title');
+    cy.get('[data-drupal-selector="edit-title-0-value"]').type('Article Title', { force: true });
+    cy.get('[data-drupal-selector="edit-body-0-value"]').type('Article Body', { force: true });
+    cy.get('#edit-submit').click();
+    cy.get('.status--status').should('contain', 'Article Article Title has been created');
   })
 
   // it('Cannot access unpublished content', () => {
