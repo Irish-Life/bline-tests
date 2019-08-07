@@ -50,7 +50,7 @@ context('Creator', () => {
     cy.get('.status--status').should('contain', 'Basic page Basic Page Title has been created');
   })
 
-  it.only('Can create a Landing Page', () => {
+  it('Can create a Landing Page', () => {
     cy.visit("admin/content");
     cy.get('[data-drupal-link-system-path="node/add"]').click({ force: true });
     cy.get('.page-title').should('contain', 'Add content');
