@@ -26,7 +26,7 @@ context('Creator', () => {
     cy.get('thead > tr > :nth-child(4)').should("contain", "Moderation state");
   })
 
-  it.only('Can create an article', () => {
+  it('Can create an article', () => {
     cy.visit("admin/content");
     cy.get('[data-drupal-link-system-path="node/add"]').click({ force: true });
     cy.get('.page-title').should('contain', 'Add content');
@@ -37,6 +37,36 @@ context('Creator', () => {
     cy.get('#edit-submit').click();
     cy.get('.status--status').should('contain', 'Article Article Title has been created');
   })
+
+  it('Can create a basic page', () => {
+    cy.visit("admin/content");
+    cy.get('[data-drupal-link-system-path="node/add"]').click({ force: true });
+    cy.get('.page-title').should('contain', 'Add content');
+    cy.contains('Basic page').click();
+    cy.get('.page-title').should('contain', 'Create Basic page');
+    cy.get('[data-drupal-selector="edit-title-0-value"]').type('Basic Page Title', { force: true });
+    cy.get('[data-drupal-selector="edit-body-0-value"]').type('Basic Page Body', { force: true });
+    cy.get('#edit-submit').click();
+    cy.get('.status--status').should('contain', 'Basic page Basic Page Title has been created');
+  })
+
+  it.only('Can create a Landing Page', () => {
+    cy.visit("admin/content");
+    cy.get('[data-drupal-link-system-path="node/add"]').click({ force: true });
+    cy.get('.page-title').should('contain', 'Add content');
+    cy.contains('Landing Page').click();
+    cy.get('.page-title').should('contain', 'Create Landing Page');
+    cy.get('[data-drupal-selector="edit-title-0-value"]').type('Landing Page Title', { force: true });
+    cy.get('[value="Add Masthead"]').click();
+    cy.get('.paragraph-type-title').scrollIntoView();
+    cy.get('label').contains('Masthead Heading').click({ force: true }).focused().type("Masthead Heading", { force: true });;
+
+    // cy.get('.field--name-field-masthead-heading').should('be', 'visible');
+    // cy.get('[data-drupal-selector="edit-body-0-value"]').type('Basic Page Body', { force: true });
+    // cy.get('#edit-submit').click();
+    // cy.get('.status--status').should('contain', 'Basic page Basic Page Title has been created');
+  })
+
 
   // it('Cannot access unpublished content', () => {
 
