@@ -66,13 +66,16 @@ context('Creator', () => {
   })
 
 
-  // it('Cannot access unpublished content', () => {
+  it.only('Cannot publish content', () => {
+    cy.visit("admin/content");
+    cy.get('#edit-node-bulk-form-0').click();
+    cy.get('#edit-action').select('Publish content');
+    cy.get('#edit-submit--2').click();
+    cy.get('.messages--error').should('contain', 'No access to execute');
+    cy.get('.messages--error > div > :nth-child(2)').should('contain', 'Publish content');
 
-  // cy.request({ method: 'GET', url: Cypress.env("cyTestArticle2Url"), failOnStatusCode: false })
-  //   .then((response) => {
-  //     expect(response.status).to.eq(403);
-  //   })
-  // })
+
+  })
 
   // it('Can access published paragraph content', () => {
   //   cy.visit('node/4');
