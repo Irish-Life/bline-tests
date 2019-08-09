@@ -75,7 +75,7 @@ context('Creator', () => {
     cy.get('.messages--error > div > :nth-child(2)').should('contain', 'Publish content');
   })
 
-  it.only('Cannot delete an article', () => {
+  it('Cannot delete an article', () => {
     cy.visit("admin/content");
     cy.get('[data-drupal-selector="edit-type"]').select('Article', { force: true });
     cy.get('#edit-submit-content').click({ force: true });
@@ -84,6 +84,17 @@ context('Creator', () => {
     cy.get('#edit-submit--2').click({ force: true });
     cy.get('.messages--error > div > :nth-child(2)').should('contain', 'Delete content');
   })
+
+  it('Cannot delete a Landing Page', () => {
+    cy.visit("admin/content");
+    cy.get('[data-drupal-selector="edit-type"]').select('Landing Page', { force: true });
+    cy.get('#edit-submit-content').click({ force: true });
+    cy.get('#edit-node-bulk-form-0').click({ force: true });
+    cy.get('#edit-action').select('Delete content', { force: true });
+    cy.get('#edit-submit--2').click({ force: true });
+    cy.get('.messages--error > div > :nth-child(2)').should('contain', 'Delete content');
+  })
+
 
   // it('Can access published paragraph content', () => {
   //   cy.visit('node/4');
