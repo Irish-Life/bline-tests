@@ -2,7 +2,7 @@
 
 context('Network Requests', () => {
   beforeEach(() => {
-    cy.visit('https://az-ag-poc-wwb-drupal-001.azurewebsites.net')
+    cy.visit('http://pages.bline.ie')
   })
 
   // Manage AJAX / XHR requests in your app

@@ -61,16 +61,16 @@ context('Creator', () => {
     cy.get('.paragraph-type-title').scrollIntoView();
     cy.get('label').contains('Masthead Heading').click({ force: true }).focused().type("Masthead Heading", { force: true });
     cy.get('label').contains('Masthead Sub Heading').click({ force: true }).focused().type("Masthead Sub Heading");
-    cy.get('#edit-submit').click();
+    cy.get('#edit-submit').click({force: true});
     cy.get('.paragraph--masthead__heading').should('contain', 'Masthead Heading');
   })
 
 
   it('Cannot publish content', () => {
     cy.visit("admin/content");
-    cy.get('#edit-node-bulk-form-0').click();
+    cy.get('#edit-node-bulk-form-0').click({force: true});
     cy.get('#edit-action').select('Publish content');
-    cy.get('#edit-submit--2').click();
+    cy.get('#edit-submit--2').click({force: true});
     cy.get('.messages--error').should('contain', 'No access to execute');
     cy.get('.messages--error > div > :nth-child(2)').should('contain', 'Publish content');
   })

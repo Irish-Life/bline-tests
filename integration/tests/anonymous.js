@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-context('Preliminary', () => {
+context('Anonymous', () => {
   beforeEach(() => {
 
   })
@@ -18,7 +18,7 @@ context('Preliminary', () => {
 
   it('Can access published content', () => {
     cy.visit(Cypress.env("cyTestArticleUrl"));
-    cy.get('.h1 > span').should("contain", "Cypress");
+    cy.get('h1').should("contain", "Pellentesque");
   })
 
   it('Cannot access unpublished content', () => {
