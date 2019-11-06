@@ -7,16 +7,19 @@ context('Creator', () => {
 
   it('Logs the user in', () => {
     cy.url().should('contain', "user/5");
+    cy.screenshot();
   })
 
   it('Can access the administration pages', () => {
     cy.visit("admin");
     cy.get('.page-title').should("contain", "Administration");
+    cy.screenshot();
   })
 
   it('Can access the content administration pages', () => {
     cy.visit("admin/content");
     cy.get('.page-title').should("contain", "Content");
+    cy.screenshot();
   })
 
   it('Can access the moderated content view', () => {
@@ -24,6 +27,7 @@ context('Creator', () => {
     cy.get('.page-title').should("contain", "Content");
     cy.visit("admin/content/moderated");
     cy.get('thead > tr > :nth-child(4)').should("contain", "Moderation state");
+    cy.screenshot();
   })
 
   it('Can create an article', () => {
@@ -36,6 +40,7 @@ context('Creator', () => {
     cy.get('[data-drupal-selector="edit-body-0-value"]').type('Article Body', { force: true });
     cy.get('#edit-submit').click();
     cy.get('.status--status').should('contain', 'Article Article Title has been created');
+    cy.screenshot();
   })
 
   it('Can create a basic page', () => {
@@ -48,6 +53,7 @@ context('Creator', () => {
     cy.get('[data-drupal-selector="edit-body-0-value"]').type('Basic Page Body', { force: true });
     cy.get('#edit-submit').click();
     cy.get('.status--status').should('contain', 'Basic page Basic Page Title has been created');
+    cy.screenshot();
   })
 
   it('Can create a Landing Page', () => {
@@ -63,6 +69,7 @@ context('Creator', () => {
     cy.get('label').contains('Masthead Sub Heading').click({ force: true }).focused().type("Masthead Sub Heading");
     cy.get('#edit-submit').click({force: true});
     cy.get('.paragraph--masthead__heading').should('contain', 'Masthead Heading');
+    cy.screenshot();
   })
 
 
@@ -73,6 +80,7 @@ context('Creator', () => {
     cy.get('#edit-submit--2').click({force: true});
     cy.get('.messages--error').should('contain', 'No access to execute');
     cy.get('.messages--error > div > :nth-child(2)').should('contain', 'Publish content');
+    cy.screenshot();
   })
 
   it('Cannot delete an article', () => {
@@ -83,6 +91,7 @@ context('Creator', () => {
     cy.get('#edit-action').select('Delete content', { force: true });
     cy.get('#edit-submit--2').click({ force: true });
     cy.get('.messages--error > div > :nth-child(2)').should('contain', 'Delete content');
+    cy.screenshot();
   })
 
   it('Cannot delete a Landing Page', () => {
@@ -93,6 +102,7 @@ context('Creator', () => {
     cy.get('#edit-action').select('Delete content', { force: true });
     cy.get('#edit-submit--2').click({ force: true });
     cy.get('.messages--error > div > :nth-child(2)').should('contain', 'Delete content');
+    cy.screenshot();
   })
 
   it('Cannot delete a Basic page', () => {
@@ -103,25 +113,7 @@ context('Creator', () => {
     cy.get('#edit-action').select('Delete content', { force: true });
     cy.get('#edit-submit--2').click({ force: true });
     cy.get('.messages--error > div > :nth-child(2)').should('contain', 'Delete content');
+    cy.screenshot();
   })
 
-  // it('Can access published paragraph content', () => {
-  //   cy.visit('node/4');
-  //   cy.get('.paragraph--masthead');
-  // })
-
-  // it('Cannot access unpublished paragraph content', () => {
-  //   cy.request({ method: 'GET', url: 'node/14', failOnStatusCode: false })
-  //   .then((response) => {
-  //     expect(response.status).to.eq(403);
-  //   })
-  // })
-
-  // it('Cannot access the admin area', () => {
-  //   cy.request({ method: 'GET', url: 'admin', failOnStatusCode: false })
-  //   .then((response) => {
-  //     expect(response.status).to.eq(403);
-  //     cy.screenshot();
-  //   })
-  // })
 })

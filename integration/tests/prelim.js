@@ -14,6 +14,7 @@ context('Preliminary', () => {
   it('Checks a user can log in', () => {
     cy.login(Cypress.env('cyAdminUser'), Cypress.env('cyAdminPassword'))
     cy.url().should('contain', "user/6");
+    cy.screenshot();
 
   })
 
@@ -23,6 +24,7 @@ context('Preliminary', () => {
     cy.logout();
     cy.reload();
     cy.get('.toolbar-icon-system-admin-content').should('be', false);
+    cy.screenshot();
   })
 
 })
